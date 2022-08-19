@@ -16,14 +16,13 @@ var roundScore = 0;
 1-6 гэсэн утгыг энэ хувьсагчид рэндомоор үүсгэж өгнө.
 */
 
-var dice = Math.floor(Math.random() * 6) + 1;
+var diceNumber = Math.floor(Math.random() * 6) + 1;
 // 1-6 хүртэлх рэндом тоо.
-
-console.log('Шоо : ' + dice);
 
 /////////////////// Домыг хэрхэн өөрчлөх вэ?
 // 1. HTML - ээс айдийг нь хайж олно.
-window.document.querySelector('#score-0').textContent = dice;
+// window.document.querySelector('#score-0').textContent = diceNumber;
+
 /* window доторх нүдэнд харагддаг документ.
 querySelector - нь домын элементийг хайж олж өгдөг функц.
 .textContent =
@@ -34,17 +33,57 @@ querySelector - нь домын элементийг хайж олж өгдөг 
 өөр утга олгоно. 
 */
 
-window.document.querySelector('#score-1').innerHTML = '<em>Yes!<em>';
+// window.document.getElementById('#score-1').innerHTML = '<em>Yes!<em>';
 // .innerHTML function - text Content биш доторх HTML ашиглан өөрчлөхийг хүсэх үед ашиглана.
 
-document.querySelector('.dice').style.display = 'none';
-// .style. - ашиглан CSS өөрчлөлт хийх нь.
+/* Програм ажиллахад бэлдэж бүх дүнг 0 болгох нь.
+id дуудах бичилт 1.
+Энэ нь олон төвөгтэй зүйлсийг дуудахад ашиглагддаг. */
+// document.querySelector('#score-0').textContent = 0;
+// document.querySelector('#score-1').textContent = 0;
 
-// Програм ажиллахад бэлдэж бүх дүнг 0 болгох нь.
-document.querySelector('#score-0').textContent = 0;
-document.querySelector('#score-1').textContent = 0;
+document.querySelector('#current-0').textContent = '0';
+document.querySelector('#current-1').textContent = '0';
 
-document.querySelector('#current-0').textContent = 0;
-document.querySelector('#current-1').textContent = 0;
+/* 
+id дуудах бичилт 2.
+Энэ нь зөвхөн Айди дуудахад зориулагдсан бичилт учраас
+өмнөхөө бодвол илүү хурдтай ажилладаг. */
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
 
 // Lesson 42:
+// 1. Уртаар
+// Roll dice товчыг Дом - оос аваад click Эвент холбоно.
+document.querySelector('.btn-roll').addEventListener('click', shooShid);
+// .addEventListener - нь эвент холбож өгнө.
+// .addEventListener('click', shooshid) - click хийх үед ямар үйлдэл хийх ёстойг араас нь залгуулан холбож өгнө.
+
+function shooShid() {
+  var diceNumber = Math.floor(Math.random() * 6) + 1;
+
+  document.querySelector('.dice').style.display = 'block';
+  // .style. - ашиглан CSS өөрчлөлт хийх нь.
+
+  document.querySelector('.dice').src = 'dice-' + diceNumber + '.png';
+  /* dice-1,2,3,4,5,6 зургуудийг товтой холбож өгөх нь.
+  img src = .src
+  dice-1,2,3,4,5,6
+  + diceNumber буюу random numbers
+  + .png (dice-1,2,3,4,5,6.png)
+  */
+}
+
+/* 2. Багасгасан нь. (Anonymous function)
+  Энэ бичилт нь програмыг илүү хурдан ажилуулна. */
+var diceDom = document.querySelector('.dice');
+
+document
+  .querySelector('.btn-roll')
+  .addEventListener('click', function shooshid() {
+    var diceNumber = Math.floor(Math.random() * 6) + 1;
+    diceDom.style.display = 'block';
+    diceDom.src = 'dice-' + diceNumber + '.png';
+  });
+
+// Lesson - 43:
