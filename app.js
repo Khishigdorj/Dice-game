@@ -1,6 +1,5 @@
 // Lesson 41:
 // Хувьсагчдийг оноож, тоглоом эхлэхэд бэлдэх нь.
-
 /* Тоглож байгаа тоглогчийн ээлжийг хадгалах хувьсагч: 
 Нэгдүгээр тоглогчийг 0,
 Хоёрдугаар тоглогчийг 1 гэж тэмдэглэе.
@@ -155,14 +154,19 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
   // Мөн доорх үйлдлүүд рүү дамжихгүй.
   if (scores[activePlayer] >= 20) {
     document.getElementById('name-' + activePlayer).textContent = 'ЯЛАГЧ !!!';
+    // 100 аас их байвал текст ЯЛАГЧ болж өөрчлөгдөнө.
     document
       .querySelector('.player-' + activePlayer + '-panel')
       .classList.add('winner');
     // .player-1-panel
+    // .winner класс ажиллагаанд орно.
+
     document
       .querySelector('.player-' + activePlayer + '-panel')
       .classList.remove('active');
-    // active буюу улаан бөөрөнхийг хасах нь.
+    // active буюу улаан бөөрөнхийг хасна.
+
+    // Харин 100 даваагүй бол үргэлжилнэ.
   } else {
     // Тоглогчийн ээлжийг солино.
     // Сольж өгдөг функцаа дуудаж өгөв.
@@ -193,4 +197,41 @@ function switchToNextPlayer() {
 }
 
 // Lesson 45: New Game Button
-document.querySelector('.btn-new').addEventListener('click', function () {});
+document.querySelector('.btn-new').addEventListener('click', newGame);
+
+// New Game function
+function newGame() {
+  // 1. Хоёр тоглогчийнхоо оноог 0 болгоно.
+  activePlayer = 0;
+  /* Тод цэнхэр өнгөтэй байгаа учир нь
+  var activePlayer буюу глобал хувьсагчийг дуудан авчирж ашиглаж буйг илтгэнэ.
+  Хэрвээ өмнөx var - ийг нь хасахгүйгээр бичвэл цоо шинэ хувьсагч болон хувирах юм. */
+
+  // Үндсэн оноонуудыг 0 болгоно.
+  scores = [0, 0];
+
+  // Ээлжийн оноог нь 0 болгоно.
+  roundScore = 0;
+
+  // Буцаагаад 0 болгох нь.
+  document.querySelector('#current-0').textContent = '0';
+  document.querySelector('#current-1').textContent = '0';
+  document.getElementById('score-0').textContent = '0';
+  document.getElementById('score-1').textContent = '0';
+
+  // Ялсан тоглогчийн нэрийг буцаах нь.
+  document.getElementById('name-0').textContent = 'ТОГЛОГЧ 1';
+  document.getElementById('name-1').textContent = 'ТОГЛОГЧ 2';
+  document.querySelector('.player-0-panel').classList.remove('winner');
+  document.querySelector('.player-1-panel').classList.remove('winner');
+
+  document.querySelector('.player-0-panel').classList.remove('active');
+  document.querySelector('.player-1-panel').classList.remove('active');
+
+  document.querySelector('.player-0-panel').classList.add('active');
+
+  diceDom.style.display = 'none';
+}
+
+// Lesson 46:
+// Ялагч тодорсны дараа тоглоомыг зогсоох төлөвийн хувьсагч хйих нь:
